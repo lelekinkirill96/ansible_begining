@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Set authorized key taken from file
+      ansible.posix.authorized_key:
+        user: root
+        state: present
+        key: "{{ lookup('file', '/home/lelekin/.ssh/id_rsa.pub') }}"
+        path: /root/.ssh/authorized_keys
+        manage_dir: false

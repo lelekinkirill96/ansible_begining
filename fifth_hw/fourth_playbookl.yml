@@ -1,0 +1,31 @@
+---
+- hosts: all
+  tasks:
+    - name: Установка ufw на Ubuntu/Debian
+      become: yes
+      apt:
+        name: ufw
+        state: present
+      when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+
+    - name: Установка firewalld на CentOS/RHEL
+      become: yes
+      yum:
+        name: firewalld
+        state: present
+      when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+    - name: Открытие порта 80 в файрволе
+      become: yes
+      block:
+        - name: Открытие порта 80 на Ubuntu/Debian
+          ufw:
+            rule: allow
+            port: 80
+          when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+
+        - name: Открытие порта 80 на CentOS/RHEL
+          firewalld:
+            service: http
+            state: enabled
+          when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'

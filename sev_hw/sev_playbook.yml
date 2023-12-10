@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: creation of directory
+      ansible.builtin.file:
+        path: /home/lelekin/testdirectory
+        state: directory
+        owner: lelekin
+        group: lelekin
+        mode: '0755'

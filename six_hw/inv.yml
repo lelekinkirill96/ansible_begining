@@ -1,0 +1,6 @@
+[master]
+inventory=./inv.yml
+ubu_server ansible_ssh_host=192.168.122.183 ansible_ssh_user=root
+ubu_desktop ansible_ssh_host=192.168.122.16 ansible_ssh_user=root
+
+

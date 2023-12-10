@@ -1,0 +1,14 @@
+---
+- hosts: all
+  tasks:
+    - name: add user 'Jennifer'
+      user:
+        name: jennifer
+        shell: /bin/bash
+        group: docker
+        append: yes
+
+
+
+
+
